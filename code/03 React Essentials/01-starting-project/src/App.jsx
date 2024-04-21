@@ -1,6 +1,6 @@
 function App() {
   return (
-    <div>
+    <div className="casual-class-name">
       <header>
         <img src="src/assets/react-core-concepts.png" alt="Stylized atom" />
         <h1>React Essentials</h1>
