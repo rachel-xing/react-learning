@@ -4,22 +4,12 @@ import GameBoard from "./components/GameBoard.jsx";
 import Log from './components/Log.jsx';
 import GameOver from "./components/GameOver.jsx";
 import {WINNING_COMBINATIONS} from "./winning-combinations.js";
-
-const PLAYERS = {
-  "X": "Player 1",
-  "O": "Player 2"
-};
-
-const INITIAL_GAME_BOARD = [
-  [null, null, null],
-  [null, null, null],
-  [null, null, null]
-];
+import {INITIAL_GAME_BOARD, PLAYERS, SYMBOL} from "./utils.js";
 
 function deriveActivePlayer(gameTurns) {
-  let currentPlayer = "X";
-  if (gameTurns.length > 0 && gameTurns[0].player === "X") {
-    currentPlayer = "O";
+  let currentPlayer = SYMBOL.X;
+  if (gameTurns.length > 0 && gameTurns[0].player === SYMBOL.X) {
+    currentPlayer = SYMBOL.O;
   }
   return currentPlayer;
 }
@@ -36,19 +26,17 @@ function deriveGameBoard(gameTurns) {
 
 function deriveWinner(gameBoard, players) {
   let winner;
-  for (const combination of WINNING_COMBINATIONS) {
-    const firstSquareSymbol = gameBoard[combination[0].row][combination[0].column];
-    const secondSquareSymbol = gameBoard[combination[1].row][combination[1].column];
-    const thirdSquareSymbol = gameBoard[combination[2].row][combination[2].column];
 
-    if (
-      firstSquareSymbol &&
-      firstSquareSymbol === secondSquareSymbol &&
-      firstSquareSymbol === thirdSquareSymbol
-    ) {
-      winner = players[firstSquareSymbol];
+  for (const combination of WINNING_COMBINATIONS) {
+    const first = gameBoard[combination[0].row][combination[0].column];
+    const second = gameBoard[combination[1].row][combination[1].column];
+    const third = gameBoard[combination[2].row][combination[2].column];
+
+    if (first && first === second && first === third) {
+      winner = players[first];
     }
   }
+
   return winner;
 }
 
@@ -64,7 +52,7 @@ function App() {
   function handleSelectSquare(rowIndex, colIndex) {
     setGameTurns(prevTurns => {
       const currentPlayer = deriveActivePlayer(prevTurns)
-      const updatedTurns = [
+      return [
         {
           square:
             {
@@ -75,7 +63,6 @@ function App() {
         },
         ...prevTurns
       ];
-      return updatedTurns;
     });
   }
 
@@ -98,14 +85,14 @@ function App() {
         <ol id="players" className="highlight-player">
           <Player
             initialName={PLAYERS.X}
-            symbol="X"
-            isActive={activePlayer === "X"}
+            symbol=SYMBOL.X
+            isActive={activePlayer === SYMBOL.X}
             onChangeName={handlePlayerNameChange}
           />
           <Player
             initialName={PLAYERS.O}
-            symbol="O"
-            isActive={activePlayer === "O"}
+            symbol=SYMBOL.O
+            isActive={activePlayer === SYMBOL.O}
             onChangeName={handlePlayerNameChange}
           />
         </ol>
