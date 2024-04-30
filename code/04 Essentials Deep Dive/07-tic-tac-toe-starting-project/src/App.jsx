@@ -76,7 +76,6 @@ function App() {
         ...prevTurns
       ];
       return updatedTurns;
-
     });
   }
 
@@ -101,12 +100,14 @@ function App() {
             initialName={PLAYERS.X}
             symbol="X"
             isActive={activePlayer === "X"}
-            onChangeName={handlePlayerNameChange}/>
+            onChangeName={handlePlayerNameChange}
+          />
           <Player
             initialName={PLAYERS.O}
             symbol="O"
             isActive={activePlayer === "O"}
-            onChangeName={handlePlayerNameChange}/>
+            onChangeName={handlePlayerNameChange}
+          />
         </ol>
         {(winner || hasDraw) && <GameOver winner={winner} onRematch={handleRematch}/>}
         <GameBoard
@@ -119,4 +120,4 @@ function App() {
   )
 }
 
-export default App
+export default App;
