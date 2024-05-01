@@ -1,5 +1,5 @@
 import {useState} from "react";
-import {PLAYERS, SYMBOL, INITIAL_GAME_BOARD} from './utils.js';
+import {SYMBOL, INITIAL_GAME_BOARD} from './utils.js';
 import Player from "./components/Player.jsx";
 import GameBoard from "./components/GameBoard.jsx";
 
