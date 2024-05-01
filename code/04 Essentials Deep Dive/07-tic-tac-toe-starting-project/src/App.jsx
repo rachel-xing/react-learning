@@ -4,6 +4,7 @@ import {WINNING_COMBINATIONS} from "./winning-combinations.js";
 import Player from "./components/Player.jsx";
 import GameBoard from "./components/GameBoard.jsx";
 import GameOver from "./refer/components/GameOver.jsx";
+import Log from "./components/Log.jsx";
 
 function deriveActivePlayer(gameTurns) {
   let currentPlayer = SYMBOL.X;
@@ -98,7 +99,7 @@ function App() {
       </div>
 
 
-      Log
+      <Log turns={gameTurns}/>
     </main>
   )
 

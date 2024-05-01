@@ -1,4 +1,4 @@
-function GameOver({winner,onRematch}) {
+function GameOver({winner, onRematch}) {
   return (
     <ol id="game-over">
       <h2>Game Over</h2>
