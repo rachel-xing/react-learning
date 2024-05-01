@@ -1,5 +1,5 @@
 import {useState} from "react";
-import {PLAYERS} from "../utils.js";
+import {PLAYERS} from "../../utils.js";
 
 function Player({symbol, onNameChange, isActive}) {
   const initialName = PLAYERS[symbol];
