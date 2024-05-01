@@ -4,8 +4,6 @@ import Player from "./components/Player.jsx";
 
 
 function App() {
-  const [players, setPlayers] = useState(PLAYERS)
-
   function handleNameChange(symbol, newName) {
     setPlayers(prevPlayers => {
       return {
