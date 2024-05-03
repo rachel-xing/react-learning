@@ -1,4 +1,4 @@
-import {calculateInvestmentResults,formatter} from "../util/investment.js";
+import {calculateInvestmentResults, formatter} from "../util/investment.js";
 
 function Results({input}) {
   const resultData = calculateInvestmentResults(input);
@@ -17,7 +17,7 @@ function Results({input}) {
     </thead>
     <tbody>
     {resultData.map((yearData) => {
-      const totalInterest = yearData.valueEndOfYear - yearData.annualInvestment * yearData.year-initialInvestment;
+      const totalInterest = yearData.valueEndOfYear - yearData.annualInvestment * yearData.year - initialInvestment;
       const totalAmountInvest = yearData.valueEndOfYear - totalInterest
       return <tr key={yearData.year}>
         <td>{yearData.year}</td>
