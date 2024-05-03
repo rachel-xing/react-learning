@@ -2,6 +2,7 @@ import {useState} from "react";
 import {PLAYERS, SYMBOL, INITIAL_GAME_BOARD} from "./utils.js";
 import Player from "./components/Player.jsx";
 import GameBoard from "./components/GameBoard.jsx";
+import Log from "./components/Log.jsx";
 
 function deriveGameBoard(gameTurns) {
   const gameBoard = [...INITIAL_GAME_BOARD.map(array => [...array])];
@@ -56,6 +57,7 @@ function App() {
   return (
     <main>
       <div id="game-container">
+
         <ol id="players" className="highlight-player">
           <Player
             symbol={SYMBOL.X}
@@ -74,6 +76,7 @@ function App() {
           onSelectSquare={handleSelectSquare}
         />
       </div>
+      <Log turns={gameTurns}/>
     </main>
 
 
