@@ -2,6 +2,7 @@ import {useState} from "react";
 import {SYMBOL,PLAYERS,INITIAL_GAME_BOARD} from "./utils.js";
 import Player from "./components/Player.jsx";
 import GameBoard from "./components/GameBoard.jsx";
+import Log from "./components/Log.jsx";
 
 function deriveActivePlayer(gameTurns) {
   let activePlayer = SYMBOL.X;
@@ -66,7 +67,7 @@ function App() {
           board={gameBoard}
         onSelectSquare={handleSelectSquare}/>
       </div>
-
+      <Log turns={gameTurns}/>
 
     </main>
   )
