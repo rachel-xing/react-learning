@@ -1,7 +1,7 @@
 import {useState} from "react";
 import {PLAYERS} from "../utils.js";
 
-function Player({symbol,onNameUpdate}) {
+function Player({symbol,onNameUpdate,isActive}) {
   const [playerName,setPlayerName] = useState(PLAYERS[symbol])
   const [isEditing,setIsEditing] = useState(false)
 
@@ -18,7 +18,7 @@ function Player({symbol,onNameUpdate}) {
 
   if(isEditing) {
     return (
-      <li>
+      <li className={isActive ? "active": ""}>
       <span className="player">
         <input type="text" value={playerName} onChange={handleChange}/>
       </span>
@@ -30,7 +30,7 @@ function Player({symbol,onNameUpdate}) {
     )}
 
   return (
-    <li>
+    <li className={isActive ? "active": ""}>
       <span className="player">
         <span className="player-name">
           {playerName}
