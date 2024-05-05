@@ -1,4 +1,4 @@
-import {calculateInvestmentResults, formatter} from "../util/investment.js";
+import {calculateInvestmentResults, formatter} from "../../util/investment.js";
 
 function Results({input}) {
   const resultData = calculateInvestmentResults(input);
