@@ -5,6 +5,7 @@ function Results({input}) {
   console.log(resultData)
   const initialInvestment = resultData[0].valueEndOfYear - resultData[0].interest - resultData[0].annualInvestment
 
+
   return <table id="result">
     <thead>
     <tr>

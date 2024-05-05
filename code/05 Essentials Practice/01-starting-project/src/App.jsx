@@ -1,6 +1,8 @@
 import {useState} from "react";
 import Header from "./components/Header.jsx";
 import UserInput from "./components/UserInput.jsx";
+import Results from "./components/Results.jsx";
+
 function App() {
   const [userInput, setUserInput] = useState({
     initialInvestment: 10000,
@@ -8,6 +10,8 @@ function App() {
     expectedReturn: 6,
     duration: 10
   });
+
+  const validInput = userInput.duration > 0
 
   function handleChange(inputIdentifier,newValue) {
     setUserInput(prevUserInput=> ({
@@ -20,6 +24,8 @@ function App() {
     <>
       <Header/>
       <UserInput userInput={userInput} onChange={handleChange}/>
+      {validInput && <Results input={userInput}/>}
+      {!validInput && <p className="center">Please make sure duration is greater than 0.</p> }
     </>
   );
 }
