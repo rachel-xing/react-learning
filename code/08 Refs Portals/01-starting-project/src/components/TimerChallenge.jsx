@@ -35,6 +35,7 @@ function TimerChallenge({title, targetTime}) {
                     targetTime={targetTime}
                     onReset ={handleReset}
                     timeRemaining={timeRemaining}/>
+
                 <section className="challenge">
                     <h2>{title}</h2>
                     <p className="challenge-time">
