@@ -8,11 +8,7 @@ import {log} from '../../log.js';
 import CounterHistory from "./CounterHistory.jsx";
 
 function isPrime(number) {
-    log(
-        'Calculating if is prime number',
-        2,
-        'other'
-    );
+    log('Calculating if is prime number', 2, 'other');
     if (number <= 1) {
         return false;
     }
@@ -33,16 +29,6 @@ const Counter = memo(function Counter({initialCount}) {
 
     const initialCountIsPrime = useMemo(() => isPrime(initialCount), [initialCount]);
 
-
-    // useEffect(()=> {
-    //     setCounterChanges([
-    //         {
-    //             value: initialCount,
-    //             id: Math.random() * 1000,}
-    //     ]);
-    // },[initialCount]);
-
-
     const [counterChanges, setCounterChanges] = useState([
         {
             value: initialCount,
@@ -50,28 +36,26 @@ const Counter = memo(function Counter({initialCount}) {
         },
     ]);
 
-    const currentCounter = counterChanges.reduce(
-        (prevCounter, counterChange) => prevCounter + counterChange.value,
-        0
-    );
-    const handleDecrement = useCallback(function handleDecrement() {
-        setCounterChanges((prevCounterChanges) => [
+    const currentCounter = counterChanges.reduce((prevCounter, counterChange) => prevCounter + counterChange.value, 0);
+
+    const handleDecrement = useCallback(() => {
+        setCounterChanges(changes => [
             {
                 value: -1,
                 id: Math.random() * 1000
             },
-            ...prevCounterChanges,
+            ...changes,
         ]);
     }, []);
 
 
-    const handleIncrement = useCallback(function handleIncrement() {
-        setCounterChanges((prevCounterChanges) => [
+    const handleIncrement = useCallback(() => {
+        setCounterChanges(changes => [
             {
                 value: 1,
                 id: Math.random() * 1000
             },
-            ...prevCounterChanges,
+            ...changes,
         ]);
     }, [])
 

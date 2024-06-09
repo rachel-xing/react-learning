@@ -14,6 +14,7 @@ export default function ConfigureCounter({onSet}) {
         onSet(enteredNumber);
         setEnteredNumber(0);
     }
+
     return (
         <section id="configure-counter">
             <h2>Set Counter</h2>
