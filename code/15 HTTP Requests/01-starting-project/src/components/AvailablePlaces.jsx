@@ -27,7 +27,7 @@ export default function AvailablePlaces({onSelectPlace}) {
             } catch (error) {
                 // update UI and show error message to user
                 setError({
-                    message: error.message || "Cound nor fetch places, please try again later."
+                    message: error.message || "Could not fetch places, please try again later."
                 });
                 setIsFetching(false);
             }
