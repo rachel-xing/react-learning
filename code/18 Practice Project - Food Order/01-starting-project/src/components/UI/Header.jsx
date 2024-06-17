@@ -5,6 +5,8 @@ import { useContext } from "react";
 
 export default function Header () {
     const cartCtx = useContext(CartContext);
+    const totalCartItems = cartCtx.items.reduce(
+        (accumulator, item) => item.quantity + accumulator, 0);
 
     return <header id="main-header">
         <div id="title">
@@ -12,7 +14,7 @@ export default function Header () {
             <h1>React Food</h1>
         </div>
         <nav>
-            <Button textOnly>Cart ({cartCtx.items.length})</Button>
+            <Button textOnly>Cart ({totalCartItems})</Button>
         </nav>
 
     </header>;
