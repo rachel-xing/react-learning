@@ -1,9 +1,14 @@
-import Header from "./components/Header.jsx";
+import Header from "./components/UI/Header.jsx";
+import Meals from "./components/UI/Meals.jsx";
+import {CartContextProvider} from "./store/CartContext.jsx";
+
+
 function App() {
     return (
-        <>
-           <Header/>
-        </>
+        <CartContextProvider>
+            <Header/>
+            <Meals/>
+        </CartContextProvider>
     );
 }
 
