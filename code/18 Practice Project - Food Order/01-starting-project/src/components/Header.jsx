@@ -1,6 +1,6 @@
-import logoImg from "../../assets/logo.jpg";
-import { Button } from "./Button.jsx";
-import CartContext from "../../store/CartContext.jsx";
+import logoImg from "../assets/logo.jpg";
+import { Button } from "./UI/Button.jsx";
+import CartContext from "../store/CartContext.jsx";
 import { useContext } from "react";
 
 export default function Header () {
