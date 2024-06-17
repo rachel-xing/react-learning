@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
-import {fetchAvailableMeals} from "../../http.js";
 import MealItem from "./MealItem.jsx";
+
 export default function Meals() {
     const [availableMeals, setAvailableMeals] = useState([]);
     const [isFetching, setIsFetching] = useState(false);
@@ -23,8 +23,6 @@ export default function Meals() {
 
         }, []
     )
-
-    console.log(availableMeals)
 
     return (
         <ul id="meals">
