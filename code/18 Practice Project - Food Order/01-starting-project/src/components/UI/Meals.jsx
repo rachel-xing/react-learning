@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import {fetchAvailableMeals} from "../http.js";
+import {fetchAvailableMeals} from "../../http.js";
 import MealItem from "./MealItem.jsx";
 export default function Meals() {
     const [availableMeals, setAvailableMeals] = useState([]);
