@@ -260,3 +260,15 @@ h1 {
         transform: translateY(0);
     }
 }
+
+.error {
+    background: pink;
+    height: 100px;
+    width: 300px;
+    border-radius: 6px;
+    color:black;
+    padding: 5px;
+    margin: auto;
+
+
+}
