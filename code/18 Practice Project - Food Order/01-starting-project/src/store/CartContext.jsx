@@ -45,7 +45,7 @@ export function CartContextProvider ({children}) {
     const value = {
         items: cart.items,
         addItem: item => dispatchCartAction({type: "ADD", item}),
-        deleteItemById: id => ispatchCartAction({type: "DELETE", item}),
+        deleteItemById: id => dispatchCartAction({type: "DELETE", id}),
         clearCart: ()=> dispatchCartAction({type: "CLEAR"}),
         totalAmount: cart.items.reduce((acc, item) => acc + item.quantity, 0),
         totalPrice: cart.items.reduce((acc, item) => acc + item.quantity * item.price, 0)

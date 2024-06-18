@@ -41,31 +41,26 @@ export default function CheckOut () {
         hideCheckOut();
         clearCart();
         clearData();
-
     }
 
-    return <Modal open={progress === "checkout"}
-                  onClose={progress === "checkout" ? handleCloseCheckOut : null}>
+    return <Modal
+        open={progress === "checkout"}
+        onClose={progress === "checkout" ? handleCloseCheckOut : null}>
         <form onSubmit={handleSubmit}>
             <h2>CheckOut</h2>
             <p>Total Amount: {currencyFormatter.format(totalPrice)} </p>
             <Input label="Full Name" type="text" id="name"/>
             <Input label="E-mail Address" type="email" id="email"/>
             <Input label="Street" type="text" id="street"/>
-
             <div className="control-row">
                 <Input label="Postal Code" type="text" id="postal-code"/>
                 <Input label="City" type="text" id="city"/>
             </div>
-
             <p className="modal-actions">
-                <Button type="button" textOnly
-                        onClick={handleCloseCheckOut}>Close</Button>
+                <Button type="button" textOnly onClick={handleCloseCheckOut}>Close</Button>
                 <Button>Submit Order</Button>
             </p>
         </form>
-        {data && <button className="button" onClick={handleFinish}>Success,
-            OK</button>}
-
+        {data && <button className="button" onClick={handleFinish}>Success, OK</button>}
     </Modal>;
 }

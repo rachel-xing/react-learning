@@ -1,43 +1,37 @@
 import Modal from "./UI/Modal.jsx";
 import { useContext } from "react";
 import CartContext from "../store/CartContext.jsx";
+import UserProgressContext from "../store/UserProgressContext.jsx";
 import { currencyFormatter } from "../util/formatting.js";
 import { Button } from "./UI/Button.jsx";
-import UserProgressContext from "../store/UserProgressContext.jsx";
 import CartItem from "./CartItem.jsx";
 
 export default function Cart () {
-    const cartCtx = useContext(CartContext);
-    const userProgressCtx = useContext(UserProgressContext);
+    const {items, totalPrice, addItem, deleteItemById} = useContext(
+        CartContext);
+    const {progress, hideCart, showCheckOut} = useContext(UserProgressContext);
 
-    const cartTotalPrice = cartCtx.items.reduce(
-        (accumulator, item) => item.price * item.quantity + accumulator, 0);
-
-    function handleCloseCart () {
-        userProgressCtx.hideCart();
-    }
-
-    function handleGotoCheckOut () {
-        userProgressCtx.showCheckOut();
-    }
-
-    return <Modal className="cart" open={userProgressCtx.progress === "cart"} onClose={userProgressCtx.progress === "cart" ? handleCloseCart : null }>
+    return <Modal
+        className="cart"
+        open={progress === "cart"}
+        onClose={progress === "cart" ? hideCart : null}>
         <h2>Your Cart</h2>
         <ul>
-            {cartCtx.items.map(item =>
-                <CartItem
-                    key={item.id}
-                    name={item.name}
-                    quantity={item.quantity}
-                    price={item.price}
-                    onIncrease={() => cartCtx.addItem(item)}
-                    onDecrease={() => cartCtx.removeItem(item.id)}/>)}
+            {items.map(item =>
+                <li className="cart-item" key={item.id}>
+                    <p>{item.name} - {item.quantity} x {currencyFormatter.format(item.price)}</p>
+                    <p className="cart-item-actions">
+                        <button onClick={() => addItem(item)}>+</button>
+                        <span>{item.quantity}</span>
+                        <button onClick={() => deleteItemById(item.id)}>-
+                        </button>
+                    </p>
+                </li>)}
         </ul>
-        <p className="cart-total">{currencyFormatter.format(cartTotalPrice)}</p>
+        <p className="cart-total">{currencyFormatter.format(totalPrice)}</p>
         <p className="modal-actions">
-            <Button textOnly onClick={handleCloseCart}>Close</Button>
-            {cartCtx.items.length > 0 &&
-                <Button onClick={handleGotoCheckOut}>Go to Checkout</Button>}
+            <Button textOnly onClick={hideCart}>Close</Button>
+            {items.length > 0 && <Button onClick={showCheckOut}>Go to Checkout</Button>}
         </p>
     </Modal>;
 }
