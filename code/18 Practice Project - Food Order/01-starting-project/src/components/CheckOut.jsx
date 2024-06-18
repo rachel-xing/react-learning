@@ -5,52 +5,54 @@ import CartContext from "../store/CartContext.jsx";
 import { currencyFormatter } from "../util/formatting.js";
 import Input from "./UI/Input.jsx";
 import { Button } from "./UI/Button.jsx";
+import useHttp from "../http.js";
+
+const config = {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+};
 
 export default function CheckOut () {
-    const cartCtx = useContext(CartContext);
-    const userProgressCtx = useContext(UserProgressContext);
-
-    const cartTotalPrice = cartCtx.items.reduce(
-        (accumulator, item) => item.price * item.quantity + accumulator, 0);
+    const {items, clearCart, totalPrice} = useContext(CartContext);
+    const {progress, hideCheckOut} = useContext(UserProgressContext);
+    const {data, sendRequest, clearData} = useHttp("http://localhost:3000/orders", config);
 
     function handleCloseCheckOut () {
-        userProgressCtx.hideCheckOut();
+        hideCheckOut();
     }
 
     function handleSubmit (event) {
         event.preventDefault();
-        const fd = new FormData(event.target);
-        const customerData = Object.fromEntries(fd.entries());
+        const formData = new FormData(event.target);
+        const customerData = Object.fromEntries(formData.entries());
+        const requestBody = JSON.stringify({
+            order: {
+                items,
+                customer: customerData,
+            },
+        });
 
-        async function sendData () {
-            const response = await fetch("http://localhost:3000/orders", {
-                method: 'POST',
-                body: JSON.stringify({
-                    order: {
-                        items: cartCtx.items,
-                        customer: customerData,
-                    },
-                }),
-                headers: {
-                    'Content-Type': "application/json",
-                },
-            });
-        }
-
-        sendData();
+        sendRequest(requestBody);
+        event.target.reset();
 
     }
 
-    return <Modal open={userProgressCtx.progress === "checkout"}
-                  onClose={userProgressCtx.progress === "checkout"
-                      ? handleCloseCheckOut
-                      : null}>
+    function handleFinish () {
+        hideCheckOut();
+        clearCart();
+        clearData();
+
+    }
+
+    return <Modal open={progress === "checkout"}
+                  onClose={progress === "checkout" ? handleCloseCheckOut : null}>
         <form onSubmit={handleSubmit}>
             <h2>CheckOut</h2>
-            <p>Total Amount: {currencyFormatter.format(cartTotalPrice)} </p>
+            <p>Total Amount: {currencyFormatter.format(totalPrice)} </p>
             <Input label="Full Name" type="text" id="name"/>
             <Input label="E-mail Address" type="email" id="email"/>
             <Input label="Street" type="text" id="street"/>
+
             <div className="control-row">
                 <Input label="Postal Code" type="text" id="postal-code"/>
                 <Input label="City" type="text" id="city"/>
@@ -62,6 +64,8 @@ export default function CheckOut () {
                 <Button>Submit Order</Button>
             </p>
         </form>
+        {data && <button className="button" onClick={handleFinish}>Success,
+            OK</button>}
 
     </Modal>;
 }
